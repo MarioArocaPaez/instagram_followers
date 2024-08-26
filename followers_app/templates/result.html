@@ -1,0 +1,41 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Non-Followers</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users Who Don't Follow You Back</h1>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Date Followed</th>
+        </tr>
+        {% for user in not_following_back_details %}
+            <tr>
+                <td><a href="{{ user.href }}" target="_blank">{{ user.username }}</a></td>
+                <td>{{ user.follow_date }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">Everyone follows you back!</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Go back to upload more files</a>
+</body>
+</html>
