@@ -42,7 +42,13 @@ def upload_files(request):
                 for username, details in following_details.items() if username not in followers_usernames
             ]
 
-            return render(request, 'result.html', {'not_following_back_details': not_following_back_details})
+            # Calculate the number of users not following back
+            not_following_back_count = len(not_following_back_details)
+
+            return render(request, 'result.html', {
+                'not_following_back_details': not_following_back_details,
+                'not_following_back_count': not_following_back_count
+            })
 
         except (json.JSONDecodeError, KeyError, ValueError) as e:
             # Set an error message if JSON is invalid or the structure is incorrect

@@ -3,20 +3,41 @@
 <html>
 <head>
     <title>Instagram Followers Check</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-    <h1>Check Who Doesn't Follow You Back</h1>
-    {% if error_message %}
-        <p style="color: red;">Error: {{ error_message }}</p>
-    {% endif %}
-    <form action="/upload/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="following_file">Upload following.json:</label>
-        <input type="file" id="following_file" name="following_file" required><br><br>
-        <label for="followers_file">Upload followers_1.json:</label>
-        <input type="file" id="followers_file" name="followers_file" required><br><br>
-        <input type="submit" value="Check">
-    </form>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h1 class="text-center mb-4">Check Who Doesn't Follow You Back</h1>
+
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+
+                <form action="/upload/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="following_file">Upload following.json:</label>
+                        <input type="file" class="form-control-file" id="following_file" name="following_file" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="followers_file">Upload followers_1.json:</label>
+                        <input type="file" class="form-control-file" id="followers_file" name="followers_file" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Check</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

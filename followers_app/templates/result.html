@@ -2,40 +2,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Instagram Non-Followers</title>
-    <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-            padding: 10px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Results - Instagram Followers Check</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-    <h1>Users Who Don't Follow You Back</h1>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Date Followed</th>
-        </tr>
-        {% for user in not_following_back_details %}
-            <tr>
-                <td><a href="{{ user.href }}" target="_blank">{{ user.username }}</a></td>
-                <td>{{ user.follow_date }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="2">Everyone follows you back!</td>
-            </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <a href="/">Go back to upload more files</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h1 class="text-center mb-4">
+                    Users Not Following Back: 
+                    {% if not_following_back_details %}
+                        {{ not_following_back_count }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h1>
+
+                {% if not_following_back_details %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover mt-4">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Instagram Link</th>
+                                    <th scope="col">Followed On</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in not_following_back_details %}
+                                    <tr>
+                                        <td>{{ user.username }}</td>
+                                        <td><a href="{{ user.href }}" target="_blank">{{ user.href }}</a></td>
+                                        <td>{{ user.follow_date }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="mt-4 text-center">Everyone you follow is following you back!</p>
+                {% endif %}
+                <div class="text-center mt-3 mb-0">
+                    <a href="/" class="btn btn-secondary">Back to Upload</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
