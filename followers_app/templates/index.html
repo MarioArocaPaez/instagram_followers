@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Followers Check</title>
+</head>
+<body>
+    <h1>Check Who Doesn't Follow You Back</h1>
+    <form action="/upload/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="following_file">Upload following.json:</label>
+        <input type="file" id="following_file" name="following_file" required><br><br>
+        <label for="followers_file">Upload followers_1.json:</label>
+        <input type="file" id="followers_file" name="followers_file" required><br><br>
+        <input type="submit" value="Check">
+    </form>
+</body>
+</html>
