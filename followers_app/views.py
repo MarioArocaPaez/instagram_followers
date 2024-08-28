@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from datetime import datetime
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
 
 def index(request):
     return render(request, 'index.html')
@@ -44,6 +46,9 @@ def upload_files(request):
 
             # Calculate the number of users not following back
             not_following_back_count = len(not_following_back_details)
+            
+            # Store the not_following_back_details in the session for later use (e.g., in PDF generation)
+            request.session['not_following_back_details'] = not_following_back_details
 
             return render(request, 'result.html', {
                 'not_following_back_details': not_following_back_details,
@@ -57,3 +62,28 @@ def upload_files(request):
     # Render the index page with an error message if something goes wrong
     return render(request, 'index.html', {'error_message': error_message})
 
+def download_pdf(request):
+    not_following_back_details = request.session.get('not_following_back_details', [])
+    not_following_back_count = len(not_following_back_details)
+    
+    # Create a context dictionary
+    context = {
+        'not_following_back_details': not_following_back_details,
+        'not_following_back_count': not_following_back_count
+    }
+    
+    # Load the template and render it with context
+    template_path = 'pdf_template.html'
+    html = render_to_string(template_path, context)
+    
+    # Create a file-like buffer to receive PDF data
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="users_not_following_back.pdf"'
+
+    # Create a PDF using xhtml2pdf
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    # Return response or error message
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
