@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,20 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
+        .title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: #343a40;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 1.25rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
@@ -29,13 +44,6 @@
         }
         .alert {
             border-radius: 8px;
-        }
-        .title {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
-            font-size: 2.5rem;
-            color: #343a40;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         .how-to-use-section {
             background-color: #f0f0f5;
@@ -54,27 +62,36 @@
             color: #555;
             line-height: 1.6;
         }
-        .how-to-use-img {
-            max-width: 100%;
+        .logo img {
+            max-width: 150px; 
             height: auto;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+
+    <!-- Main Container -->
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <h1 class="text-center mb-4 title">InstaBack</h1>
-                <h1 class="text-center mb-4">Check Who Doesn't Follow You Back</h1>
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <img src="{% static 'followers_app/InstaBack_transparent-.png' %}" alt="InstaBack Logo" style="width: 200px;">
+            <h1 class="title">InstaBack</h1>
+            <p class="lead">Check Who Doesn't Follow You Back on Instagram</p>
+        </div>
 
-                {% if error_message %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error_message }}
-                    </div>
-                {% endif %}
+        <!-- Alert for Error Message -->
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
 
+        <!-- Form Card -->
+        <div class="card">
+            <div class="card-header text-center">Upload Files</div>
+            <div class="card-body">
                 <form action="/upload/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
@@ -91,28 +108,17 @@
         </div>
     </div>
 
-    <!-- "How to Use" Section -->
+    <!-- How to Use Section -->
     <div class="container how-to-use-section">
         <div class="row">
             <div class="col-md-12">
                 <h2 class="how-to-use-title">How to Use InstaBack</h2>
                 <p class="how-to-use-text">
-                    To get started with InstaBack, follow these simple steps. First, download your Instagram data by going to your Instagram settings and selecting "Download your information." Request a copy of your data and choose to download "Part of your information." Select only "Followers and followed," and set the date range to "Since the beginning." Choose "JSON" as the format and set the quality to "Medium." You will receive a .zip file that includes your <code>following.json</code> and <code>followers_1.json</code> files. These files are necessary to check who is not following you back.
-                </p>                
-                <p class="how-to-use-text">
-                    Once you have downloaded the data, extract the files and upload them here. Use the form above to upload the <code>following.json</code> and <code>followers_1.json</code> files, then click the "Check" button to see the results.
+                    To get started, download your Instagram data by going to your Instagram settings and selecting "Download your information." Choose "JSON" format and download your followers data. Extract the files, then upload <code>following.json</code> and <code>followers_1.json</code> using the form above.
                 </p>
                 <p class="how-to-use-text">
-                    Unlike typical apps that require access to your Instagram account, InstaBack is different. We don't need access to your account; we only need your help in getting the relevant data from Instagram. Once you provide the necessary files, we will process them and give you the results. Rest assured, InstaBack does not store any data. The files you provide and the results generated are used only for the purpose of providing you with the information you requested, and nothing is stored or saved.
+                    InstaBack processes the files you upload and checks who doesn't follow you back. Your data is not stored or saved by InstaBack. We only use it to show you the information you requested.
                 </p>
-                {% comment %} 
-                <!-- Example placeholder for images -->
-                <img src="{% static 'followers_app/how_to_use_example.png' %}" alt="Example Image" class="how-to-use-img">
-                <p class="how-to-use-text">
-                    <!-- Placeholder for additional instructions -->
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
-                </p> 
-                {% endcomment %}
             </div>
         </div>
     </div>
