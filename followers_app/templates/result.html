@@ -16,18 +16,18 @@
         .container {
             background-color: #ffffff;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.1);
         }
         .title {
             font-weight: 700;
             font-size: 2.5rem;
             color: #343a40;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            text-shadow: 0.0625rem 0.0625rem 0.125rem rgba(0, 0, 0, 0.1);
         }
         .btn-primary, .btn-secondary {
-            width: 150px;
-            margin: 5px;
+            width: 9.375rem;
+            margin: 0.3125rem;
         }
         .btn-primary:hover {
             background-color: #0056b3;
@@ -42,7 +42,7 @@
             color: #ffffff;
         }
         .alert {
-            border-radius: 8px;
+            border-radius: 0.5rem;
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,7 +53,7 @@
     <div class="container mt-5">
         <!-- Header -->
         <div class="text-center mb-4">
-            <img src="{% static 'followers_app/InstaBack_transparent-.png' %}" alt="InstaBack Logo" class="mb-3" style="width: 100px;">
+            <img src="{% static 'followers_app/InstaBack_transparent-.png' %}" alt="InstaBack Logo" class="mb-3" style="width: 6.25rem;">
             <h1 class="title">InstaBack Results</h1>
             <p class="lead">Users Not Following Back: {{ not_following_back_count }}</p>
         </div>
