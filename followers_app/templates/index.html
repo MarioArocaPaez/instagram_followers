@@ -62,6 +62,12 @@
             color: #555;
             line-height: 1.6;
         }
+        .custom-file-input {
+            cursor: pointer;
+        }
+        .custom-file-label {
+            overflow: hidden;
+        }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
@@ -89,13 +95,13 @@
             <div class="card-body">
                 <form action="/upload/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="following_file">Upload following.json:</label>
-                        <input type="file" class="form-control-file" id="following_file" name="following_file" required>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="following_file" name="following_file" required>
+                        <label class="custom-file-label" for="following_file">Choose <code>following.json</code> file...</label>
                     </div>
-                    <div class="form-group">
-                        <label for="followers_file">Upload followers_1.json:</label>
-                        <input type="file" class="form-control-file" id="followers_file" name="followers_file" required>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="followers_file" name="followers_file" required>
+                        <label class="custom-file-label" for="followers_file">Choose <code>followers_1.json</code> file...</label>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Check</button>
                 </form>
